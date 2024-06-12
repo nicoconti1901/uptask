@@ -2,10 +2,32 @@
 
 require_once __DIR__ . '/../includes/app.php';
 
+use Controllers\LoginController;
 use MVC\Router;
 $router = new Router();
 
+//Login
+$router->get('/', [LoginController::class,'login']);
+$router->post('/', [LoginController::class,'login']);
+$router->get('/logout', [LoginController::class,'logout']);
 
+
+//Crear cuenta
+$router->get('/crear-cuenta', [LoginController::class,'crearCuenta']);
+$router->post('/crear-cuenta', [LoginController::class,'crearCuenta']);
+
+//Formulario de olvido de contraseña
+$router->get('/olvide-password', [LoginController::class,'olvidePassword']);
+$router->post('/olvide-password', [LoginController::class,'olvidePassword']);
+
+
+//Nuevo password
+$router->get('/reestablecer', [LoginController::class,'reestablecer']);
+$router->post('/reestablecer', [LoginController::class,'reestablecer']);
+
+//Confirma la cuenta
+$router->get('/mensaje', [LoginController::class,'mensaje']);
+$router->get('/confirmar-cuenta', [LoginController::class,'confirmarCuenta']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
