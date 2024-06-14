@@ -1,0 +1,29 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.login{
+    margin-top: 4rem;
+    .uptask{
+        background: linear-gradient(to right, v.$rojo 0%, lighten(v.$negro, 60%) 100%);
+        color: transparent;
+        background-clip: text;
+        font-size: 7rem;
+        text-align: center;
+        @include m.tablet{
+            font-size: 10rem;
+        }
+    }
+
+    input[type="submit"]{
+        @include m.boton(v.$rojo, v.$blanco);
+    }
+
+    .acciones{
+        a{
+            color: v.$rojo;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
