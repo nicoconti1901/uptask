@@ -1,0 +1,25 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.login{
+    margin-top: 4rem;
+    .uptask{
+        @include m.textoDegradado(v.$rojo, v.$negro);
+        margin-bottom: 4rem;
+    }
+
+    input[type="submit"]{
+        @include m.boton(v.$rojo, v.$blanco);
+        
+        
+    }
+
+    .acciones{
+        a{
+            color: v.$rojo;
+            &:hover{
+                text-decoration: underline;
+            }
+        }
+    }
+}
