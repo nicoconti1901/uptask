@@ -36,7 +36,7 @@ class LoginController
 
     public static function olvidePassword(Router $router)
     {
-        
+
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
         $router->render('auth/olvide-password', [
@@ -46,7 +46,7 @@ class LoginController
 
     public static function reestablecer(Router $router)
     {
-        
+
 
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
@@ -55,12 +55,16 @@ class LoginController
         ]);
     }
 
-    public static function mensaje()
+    public static function mensaje(Router $router)
     {
-        echo 'Desdeeeeeeeee LoginController';
+        $router->render('auth/mensaje', [
+            'titulo' => 'Cuenta creada correctamente'
+        ]);
     }
-    public static function confirmarCuenta()
+    public static function confirmarCuenta(Router $router)
     {
-        echo 'Desdeeeeeeeee LoginController';
+        $router->render('auth/confirmar', [
+            'titulo' => 'Cuenta confirmada'
+        ]);
     }
 }

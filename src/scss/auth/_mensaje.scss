@@ -1,0 +1,20 @@
+@use 'base/mixins' as m;
+@use 'base/variables' as v;
+
+.mensaje{
+    margin-top: 4rem;
+    .uptask{
+        @include m.textoDegradado(v.$rojo, v.$negro);
+        margin-bottom: 4rem;
+    }
+
+    .descripcion-pagina{
+        border: 2px solid v.$negro;
+        background-color: rgb(181, 230, 34);
+        font-weight:bold;
+    }
+
+    
+
+    
+}
