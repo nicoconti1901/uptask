@@ -34,12 +34,14 @@ class LoginController
         ]);
     }
 
-    public static function olvidePassword()
+    public static function olvidePassword(Router $router)
     {
-        echo 'Desde olvide password';
-
+        
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         }
+        $router->render('auth/olvide-password', [
+            'titulo' => 'Reestablezca su contraseña'
+        ]);
     }
 
     public static function reestablecer()
