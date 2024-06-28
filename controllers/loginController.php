@@ -26,21 +26,45 @@ class LoginController
     public static function crearCuenta(Router $router)
 
     {
-        $usuario = new Usuario();
 
+        $usuario = new Usuario();
+        $alertas = [];
         if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             // debuguear($_POST);
             $usuario->sincronizar($_POST);
-            
-
             $alertas = $usuario->validarNuevaCuenta();
-            debuguear($alertas);
+            if (empty($alertas)) {
+                $existeUsuario = Usuario::where('email', $usuario->email);
+                if ($existeUsuario) {
+                    Usuario::setAlerta('error', 'El email ya esta registrado');
+                    $alertas = Usuario::getAlertas();
+                } else {
+                    //Hashear password
+                    $usuario->hashPassword();
+
+                    //Eliminar password2
+                    unset($usuario->password2);
+
+                    //Generar token
+                    $usuario->generarToken();
+
+                    //Crear usuario
+                    $resultado = $usuario->guardar();
+
+                    if ($resultado) {
+
+                        header('Location: /mensaje');
+                    }
+                }
+            }
         }
+
 
         //Render a la vista
         $router->render('auth/crear-cuenta', [
             'titulo' => 'Crea tu cuenta en UpTask',
-            'usuario' => $usuario
+            'usuario' => $usuario,
+            'alertas' => $alertas
         ]);
     }
 
