@@ -11,6 +11,13 @@
     &.error{
         background-color: lighten(v.$rojo, 60%);
         border-left: 0.5rem solid v.$rojo;
+        color: v.$rojo;
+    }
+
+    &.exito{
+        background-color: lighten(v.$verde, 60%);
+        border-left: 0.5rem solid v.$verde;
+        color: v.$verde;
     }
 
 

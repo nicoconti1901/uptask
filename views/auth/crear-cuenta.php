@@ -23,7 +23,7 @@
                 <input type="password" name="password2" id="password2" placeholder="Repite tu Password">
             </div>
 
-            <input type="submit" class="boton" value="Iniciar Sesión">
+            <input type="submit" class="boton" value="Crear Cuenta">
         </form>
         <div class="acciones">
             <a href="/">¿Ya tienes una cuenta? Inicia Sesion</a>
