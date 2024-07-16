@@ -6,6 +6,14 @@ class Usuario extends ActiveRecord
 {
     protected static $tabla = 'usuarios';
     protected static $columnasDB = ['id', 'nombre', 'email', 'password','token', 'confirmado'];
+    public $id;
+    public $nombre;
+    public $email;
+    public $password;
+    public $password2;
+    public $token;
+    public $confirmado;
+
 
     public function __construct($args = [])
     {
@@ -15,7 +23,7 @@ class Usuario extends ActiveRecord
         $this->password = $args['password'] ?? '';
         $this->password2 = $args['password2'] ?? '';
         $this->token = $args['token'] ?? '';
-        $this->confirmado = $args['confirmado'] ?? '';
+        $this->confirmado = $args['confirmado'] ?? 0;
     }
 
     // Validación
@@ -23,26 +31,38 @@ class Usuario extends ActiveRecord
     public function validarNuevaCuenta()
     {
         if (!$this->nombre) {
-            self::$alertas['error'][] = ('El nombre es obligatorio');
+            self::$alertas['error'][] = 'El nombre es obligatorio';
         }
 
         if (!$this->email) {
-            self::$alertas['error'][] = ('El email es obligatorio');
+            self::$alertas['error'][] = 'El email es obligatorio';
         }
 
         if (!$this->password) {
-            self::$alertas['error'][] = ('La contraseña es obligatoria');
+            self::$alertas['error'][] = 'La contraseña es obligatoria';
         }
 
         if (strlen($this->password) < 6) {
-            self::$alertas['error'][] = ('La contraseña debe tener al menos 6 caracteres');
+            self::$alertas['error'][] = 'La contraseña debe tener al menos 6 caracteres';
         }
 
         if ($this->password !== $this->password2) {
-            self::$alertas['error'][] = ('Las contraseñas no son iguales');
+            self::$alertas['error'][] = 'Las contraseñas no son iguales';
         }
 
 
         return self::$alertas;
+    }
+
+    public function hashPassword()
+    {
+        
+            $this->password = password_hash($this->password, PASSWORD_BCRYPT);
+       
+    }
+
+    public function generarToken()
+    {
+        $this->token = uniqid();
     }
 }
