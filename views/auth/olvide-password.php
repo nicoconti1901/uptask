@@ -3,8 +3,8 @@
 
     <div class="contenedor-sm">
         <p class="descripcion-pagina">Reestablezca su contraseña</p>
-
-        <form class="formulario" action="/olvidePassword" method="POST">
+        <?php include_once __DIR__ . '/../templates/alertas.php' ?>
+        <form class="formulario" action="/olvide-password" method="POST" novalidate>
         <
             <div class="campo">
                 <label for="email">Email</label>
