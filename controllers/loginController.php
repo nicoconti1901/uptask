@@ -6,22 +6,42 @@ use Clases\Email;
 use Model\Usuario;
 use MVC\Router;
 
-class LoginController
-{
-    public static function login(Router $router)
-    {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-        }
+class LoginController {
+    public static function login(Router $router){
+        $alertas = [];
 
+        if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+            $usuario = new Usuario($_POST);
+            $alertas = $usuario->validarLogin();
+
+            if (empty($alertas)) {
+                //Revisar si el usuario existe
+                $usuario = Usuario::where('email', $usuario->email);
+                if (!$usuario || !$usuario->confirmado) {
+                    Usuario::setAlerta('error', 'El usuario no existe o no ha confirmado su cuenta');
+                } else {
+                    //Verificar password
+                    if (password_verify($_POST['password'], $usuario->password)) {
+                        //Iniciar sesion
+                       session_start();
+                        $_SESSION['id'] = $usuario->id;
+                        $_SESSION['nombre'] = $usuario->nombre;
+                        $_SESSION['email'] = $usuario->email;
+                        $_SESSION['login'] = true;
+                        header('Location: /proyectos');
+                    } else {
+                        Usuario::setAlerta('error', 'El password es incorrecto');
+                    }
+                }
+            }
+        } 
+        
+        $alertas = Usuario::getAlertas();
         //Render a la vista
         $router->render('auth/login', [
-            'titulo' => 'Iniciar Sesión'
+            'titulo' => 'Iniciar Sesión',
+            'alertas' => $alertas
         ]);
-    }
-
-    public static function logout()
-    {
-        echo 'Desdeeeeeeeee LoginController';
     }
 
     public static function crearCuenta(Router $router)
