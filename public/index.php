@@ -3,6 +3,7 @@
 require_once __DIR__ . '/../includes/app.php';
 
 use Controllers\LoginController;
+use Controllers\dashboardController;
 use MVC\Router;
 $router = new Router();
 
@@ -28,6 +29,11 @@ $router->post('/reestablecer', [LoginController::class,'reestablecer']);
 //Confirma la cuenta
 $router->get('/mensaje', [LoginController::class,'mensaje']);
 $router->get('/confirmar-cuenta', [LoginController::class,'confirmarCuenta']);
+
+//Zona de proyectos
+$router->get('/dashboard', [dashboardController::class,'index']);
+$router->get('/crear-proyecto', [dashboardController::class,'crearProyecto']);
+$router->get('/perfil', [dashboardController::class,'perfil']);
 
 
 // Comprueba y valida las rutas, que existan y les asigna las funciones del Controlador
