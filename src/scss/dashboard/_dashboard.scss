@@ -15,8 +15,23 @@
   .contenido {
     padding: 2rem;
     .nombre-pagina {
-      font-size: 2.8rem;
+      font-size: 3.8rem;
       text-align: center;
+    }
+  }
+
+  .formulario {
+    input:not([type="submit"]) {
+      background-color: rgba(253, 253, 253, 0.47);
+      border: rgb(112, 111, 111) 1px solid;
+    }
+
+    input[type="submit"] {
+      @include m.boton(v.$rojo, v.$blanco);
+      padding: 0.5rem 1rem;
+      cursor: pointer;
+      text-transform: uppercase;
+      font-weight: bold;
     }
   }
 }
