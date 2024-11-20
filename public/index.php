@@ -33,6 +33,8 @@ $router->get('/confirmar-cuenta', [LoginController::class,'confirmarCuenta']);
 //Zona de proyectos
 $router->get('/dashboard', [dashboardController::class,'index']);
 $router->get('/crear-proyecto', [dashboardController::class,'crearProyecto']);
+$router->post('/crear-proyecto', [dashboardController::class,'crearProyecto']);
+$router->get('/proyecto', [dashboardController::class,'proyecto']);
 $router->get('/perfil', [dashboardController::class,'perfil']);
 
 
